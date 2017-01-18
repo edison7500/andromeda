@@ -2,7 +2,7 @@
 
 from scrapy.http import HtmlResponse
 from selenium import webdriver
-from urlparse import urlparse
+# from urlparse import urlparse
 
 from andromeda import settings
 import logging

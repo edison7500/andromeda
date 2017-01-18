@@ -1,7 +1,6 @@
 # coding=utf-8
 import scrapy
 from urlparse import urlparse
-
 from andromeda.items import EntityItem
 
 
