@@ -27,5 +27,7 @@ class EntityItem(scrapy.Item):
         input_processor=MapCompose(remove_tags),
         output_processor=TakeFirst(),
     )
+    origin_link = scrapy.Field()
+
     image_urls  = scrapy.Field()
     images      = scrapy.Field()

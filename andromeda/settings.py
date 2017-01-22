@@ -66,9 +66,16 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'scrapy.pipelines.images.ImagesPipeline': 1
+    'andromeda.pipelines.DuplicatesPipeline': 100,
+    'scrapy.pipelines.images.ImagesPipeline': 300,
+    'andromeda.pipelines.PostEntityPipeline': 500,
 }
-IMAGES_STORE = '/tmp/images'
+
+SERVER_URL            = 'http://localhost:8000/api/entities/'
+
+IMAGES_STORE    = '/tmp/images'
+
+
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html

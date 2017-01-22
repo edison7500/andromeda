@@ -37,5 +37,6 @@ class GKSpider(scrapy.Spider):
         item.add_css('title', 'div.entity-title')
         item.add_css('price', 'div.price-tag > span', re='(\d+\.\d+)')
         item.add_css('image_urls', 'div.other-pic-list > a > img::attr(src)')
+        item.add_css('origin_link', response.url)
         # item.add_value('image_urls', image_urls)
         return item.load_item()
