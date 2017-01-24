@@ -21,12 +21,7 @@ class AmazonSpider(scrapy.Spider):
         o   = urlparse(response.url)
         for row in response.css('ul#s-results-list-atf > li'):
             dp_id   = row.css('li::attr(data-asin)').extract_first()
-            url     = "{scheme}:://{host}/dp/{production}".format(
-                scheme=o.scheme,
-                host=o.hostname,
-                production=dp_id,
-            )
-            self.logger.info(url)
+            url     = row.css('a::attr(href)').extract_first()
             yield scrapy.Request(url, self.parse_book)
 
     def parse_book(self, response):
