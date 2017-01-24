@@ -13,7 +13,6 @@ class GKSpider(scrapy.Spider):
         'guoku.com',
     ]
 
-
     def __init__(self, uri, *args, **kwargs):
         super(GKSpider, self).__init__(*args, **kwargs)
         self.start_urls = [
