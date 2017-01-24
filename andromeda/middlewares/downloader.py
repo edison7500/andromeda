@@ -23,7 +23,7 @@ class PhantomJSDownloader(object):
             except Exception as e:
                 logging.error(e.message)
             finally:
-                browser.quit()
+                browser.close()
             return response
 
 

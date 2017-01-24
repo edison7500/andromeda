@@ -47,7 +47,8 @@ DEFAULT_REQUEST_HEADERS = {
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 SPIDER_MIDDLEWARES = {
-#    'andromeda.middlewares.AndromedaSpiderMiddleware': 543,
+    # 'andromeda.middlewares.downloader.PhantomJSDownloader': 100,
+   # 'andromeda.middlewares.AndromedaSpiderMiddleware': 543,
 }
 
 # Enable or disable downloader middlewares
