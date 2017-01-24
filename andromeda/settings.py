@@ -46,17 +46,17 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
-SPIDER_MIDDLEWARES = {
-    # 'andromeda.middlewares.downloader.PhantomJSDownloader': 100,
+# SPIDER_MIDDLEWARES = {
+#     'andromeda.middlewares.downloader.PhantomJSDownloader': 100,
    # 'andromeda.middlewares.AndromedaSpiderMiddleware': 543,
-}
+# }
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-DOWNLOADER_MIDDLEWARES = {
+# DOWNLOADER_MIDDLEWARES = {
 #    'andromeda.middlewares.MyCustomDownloaderMiddleware': 543,
 #     'andromeda.middlewares.downloader.PhantomJSDownloader': 100,
-}
+# }
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
@@ -67,12 +67,12 @@ DOWNLOADER_MIDDLEWARES = {
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'andromeda.pipelines.DuplicatesPipeline': 100,
+    # 'andromeda.pipelines.DuplicatesPipeline': 100,
     'scrapy.pipelines.images.ImagesPipeline': 300,
-    'andromeda.pipelines.PostEntityPipeline': 500,
+    # 'andromeda.pipelines.PostEntityPipeline': 500,
 }
 
-SERVER_URL            = 'http://localhost:8000/api/entities/'
+SERVER_URL      = 'http://localhost:8000/api/entities/'
 
 IMAGES_STORE    = '/tmp/images'
 
@@ -101,4 +101,13 @@ IMAGES_STORE    = '/tmp/images'
 
 
 PHANTOMJS_PATH      = '/usr/local/bin/phantomjs'
-PHANTOMJS_SPIDER    = []
+PHANTOMJS_SPIDER    = ['amazon']
+
+
+SPLASH_URL = 'http://localhost:8050'
+
+DOWNLOADER_MIDDLEWARES = {
+    'scrapy_splash.SplashCookiesMiddleware': 723,
+    'scrapy_splash.SplashMiddleware': 725,
+    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+}
