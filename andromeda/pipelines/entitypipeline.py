@@ -16,7 +16,7 @@ from andromeda import settings
 class DuplicatesPipeline(object):
 
     def process_item(self, item, spider):
-        identified_code     = md5(item['origin_link']).hexdigest()
+        identified_code     = md5(item['asin']).hexdigest()
 
         check_url           = "{url}/{identified_code}".format(
             url = settings.SERVER_URL,

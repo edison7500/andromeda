@@ -27,6 +27,7 @@ class EntityItem(scrapy.Item):
         input_processor=MapCompose(remove_tags),
         output_processor=TakeFirst(),
     )
+
     price   = scrapy.Field(
         input_processor=MapCompose(remove_tags),
         output_processor=TakeFirst(),
@@ -68,12 +69,15 @@ class BookItem(scrapy.Item):
         input_processor=MapCompose(remove_tags, filter_desc),
         output_processor=TakeFirst(),
     )
+    asin        = scrapy.Field(
+        output_processor=TakeFirst(),
+    )
     price       = scrapy.Field(
         input_processor=MapCompose(remove_tags),
         output_processor=TakeFirst(),
     )
-    source      = scrapy.Field()
-    link        = scrapy.Field()
+    # source      = scrapy.Field()
+    origin_link = scrapy.Field()
     image_urls  = scrapy.Field(
         input_processor=MapCompose(filter_image),
     )
