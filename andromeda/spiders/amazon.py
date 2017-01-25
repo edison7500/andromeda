@@ -35,12 +35,14 @@ class AmazonSpider(scrapy.Spider):
                                 )
 
     def parse_book(self, response):
+        o       = urlparse(response.url)
 
         item    = ItemLoader(item=BookItem(), response=response)
 
         item.add_css('title', 'span#productTitle')
         item.add_css('desc', 'div#bookDescription_feature_div > noscript')
         item.add_css('price', 'span.a-color-price', re='(\d+\.\d+)')
+        item.add_value('source', o.netloc)
         item.add_value('link', response.url)
         item.add_css('image_urls', 'div.imageThumb > img::attr(src)')
 

@@ -14,4 +14,5 @@ Andromeda
 * [Scrapy 实战（二）如何爬取页面中的图片信息。](http://jiaxin.im/blog/scrapy-shi-zhan-er-pa-qu-ye-mi/)
 * [scrapy 实战（三）页面抓取完成如何同步到服务端 ](http://jiaxin.im/blog/scrapy-shi-zhan-san-ye-mian-zh/)
 * [scrapy 实战（四）如何抓取通过js生成的页面](http://jiaxin.im/blog/scrapy-shi-zhan-si-ru-he-zhua/)
+* [scrapy 实战（五）爬与反爬](http://jiaxin.im/blog/scrapy-shi-zhan-wu-pa-yu-fan-p/)
 
