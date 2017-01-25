@@ -67,14 +67,12 @@ DEFAULT_REQUEST_HEADERS = {
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    # 'andromeda.pipelines.DuplicatesPipeline': 100,
-    'scrapy.pipelines.images.ImagesPipeline': 300,
+    'andromeda.pipelines.qiniupipeline.QNImagesPipeline': 100,
+    # 'scrapy.pipelines.images.ImagesPipeline': 300,
     # 'andromeda.pipelines.PostEntityPipeline': 500,
 }
 
-SERVER_URL      = 'http://localhost:8000/api/entities/'
 
-IMAGES_STORE    = '/tmp/images'
 
 
 
@@ -111,3 +109,13 @@ DOWNLOADER_MIDDLEWARES = {
     'scrapy_splash.SplashMiddleware': 725,
     'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
 }
+
+SERVER_URL      = 'http://localhost:8000/api/books/'
+
+'''
+    setting storage
+'''
+IMAGES_STORE                = 'book/images/'
+QINIU_ACCESS_KEY            = "xD6MU4_jZANfAqu9auFQm4qkSIx_ln2hIefKIFAU"
+QINIU_SECRET_KEY            = "NkTHwgTFQHFaujEB3Fo-ZC2jgf6LkjkWT0iWbwWP"
+QINIU_BUCKET_NAME           = "imgjiaxin"
