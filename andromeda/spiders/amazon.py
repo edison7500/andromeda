@@ -43,16 +43,16 @@ class AmazonSpider(scrapy.Spider):
                                 )
 
     def parse_book(self, response):
-        # o       = urlparse(response.url)
         key     = md5(response.url).hexdigest()
         item    = ItemLoader(item=BookItem(), response=response)
 
-        item.add_css('title', 'html > head > title')
+        title   = response.css('span#productTitle')
+        if len(title) == 0:
+            title = response.css('span#ebooksProductTitle')
+        item.add_value('title', title.extract_first())
         item.add_css('desc', 'div#bookDescription_feature_div > noscript')
         item.add_css('price', 'span.a-color-price', re='(\d+\.\d+)')
         item.add_value('asin', self.queue_dict[key])
         item.add_value('origin_link', response.url)
         item.add_css('image_urls', 'div.imageThumb > img::attr(src)')
-        # print item.load_item()
         return item.load_item()
-        # return item.load_item()

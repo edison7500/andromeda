@@ -111,6 +111,7 @@ DOWNLOADER_MIDDLEWARES = {
 }
 
 SERVER_URL      = 'http://jiaxin.im/api/books/'
+# SERVER_URL      = 'http://localhost:8000/api/books/'
 
 '''
     setting storage
