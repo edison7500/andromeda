@@ -41,8 +41,6 @@ class QNFilesStore(object):
         # print res
         token       = self.q.upload_token(self.QINIU_BUCKET_NAME, path)
         res, info   = put_data(token, path, buf.getvalue())
-        print("persist res", res)
-
 
     def stat_file(self, path, info):
         bucket = BucketManager(self.q)

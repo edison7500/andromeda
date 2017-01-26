@@ -77,7 +77,9 @@ class BookItem(scrapy.Item):
         output_processor=TakeFirst(),
     )
     # source      = scrapy.Field()
-    origin_link = scrapy.Field()
+    origin_link = scrapy.Field(
+        output_processor=TakeFirst(),
+    )
     image_urls  = scrapy.Field(
         input_processor=MapCompose(filter_image),
     )

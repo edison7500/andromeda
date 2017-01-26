@@ -32,6 +32,7 @@ class DuplicatesPipeline(object):
 class PostEntityPipeline(object):
 
     def process_item(self, item, spider):
+        print dict(item)
         res = requests.post(settings.SERVER_URL, json=dict(item))
         if res.status_code == 200:
             return item
