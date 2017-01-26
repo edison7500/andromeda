@@ -98,8 +98,8 @@ ITEM_PIPELINES = {
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 
-PHANTOMJS_PATH      = '/usr/local/bin/phantomjs'
-PHANTOMJS_SPIDER    = ['amazon']
+# PHANTOMJS_PATH      = '/usr/local/bin/phantomjs'
+# PHANTOMJS_SPIDER    = ['amazon']
 
 
 SPLASH_URL = 'http://localhost:8050'
@@ -110,8 +110,8 @@ DOWNLOADER_MIDDLEWARES = {
     'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
 }
 
-SERVER_URL      = 'http://jiaxin.im/api/books/'
-# SERVER_URL      = 'http://localhost:8000/api/books/'
+# SERVER_URL      = 'http://jiaxin.im/api/books/'
+SERVER_URL      = 'http://localhost:8000/api/books/'
 
 '''
     setting storage
