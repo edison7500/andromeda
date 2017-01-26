@@ -110,7 +110,7 @@ DOWNLOADER_MIDDLEWARES = {
     'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
 }
 
-SERVER_URL      = 'http://localhost:8000/api/books/'
+SERVER_URL      = 'http://jiaxin.im/api/books/'
 
 '''
     setting storage
