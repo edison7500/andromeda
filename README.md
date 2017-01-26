@@ -9,6 +9,11 @@ Andromeda
 * phantomjs==2.1.1
 
 
+## Change Log
+* 增加对七牛存储的支持
+* 增加爬去 amazon.cn 
+
+
 ## 教程
 * [Scrapy 实战（一）如何构建一个爬虫系统。](http://jiaxin.im/blog/scrapy-jiao-cheng-yi-ru-he-gou/)
 * [Scrapy 实战（二）如何爬取页面中的图片信息。](http://jiaxin.im/blog/scrapy-shi-zhan-er-pa-qu-ye-mi/)
