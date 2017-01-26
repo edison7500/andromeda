@@ -32,9 +32,10 @@ class DuplicatesPipeline(object):
 class PostEntityPipeline(object):
 
     def process_item(self, item, spider):
-        print dict(item)
+        image_path          = [row['path'] for row in item['images']]
+        item['image_urls']  = image_path
         res = requests.post(settings.SERVER_URL, json=dict(item))
-        if res.status_code == 200:
+        if res.status_code == 201:
             return item
         else:
             logging.error(res.text)

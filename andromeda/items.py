@@ -55,8 +55,7 @@ def filter_desc(value):
     h       = HTMLParser()
     content = h.unescape(value)
     content = remove_tags(content.strip())
-
-    return content
+    return h.unescape(content)
 
 
 class BookItem(scrapy.Item):

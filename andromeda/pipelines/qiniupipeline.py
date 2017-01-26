@@ -12,33 +12,14 @@ import qiniu.config
 
 class QNFilesStore(object):
 
-    # OSS_ACCESS_KEY_ID       = settings.OSS_ACCESS_KEY_ID
-    # OSS_SECRET_ACCESS_KEY   = settings.OSS_SECRET_ACCESS_KEY
-    # OSS_ENDPOINT            = settings.OSS_ENDPOINT
-    # OSS_BUCKET              = settings.OSS_BUCKET
     QINIU_ACCESS_KEY        = settings.QINIU_ACCESS_KEY
     QINIU_SECRET_KEY        = settings.QINIU_SECRET_KEY
     QINIU_BUCKET_NAME       = settings.QINIU_BUCKET_NAME
 
-    # HEADERS = {
-    #     'Cache-Control': 'max-age=172800',
-    #     'Expires': 180,
-    # }
-
     def __init__(self, uri):
         self.q  = Auth(self.QINIU_ACCESS_KEY, self.QINIU_SECRET_KEY)
-        # self.oss_bucket = self._get_oss_bucket()
-
-    # def _get_qn_bucket(self):
-    #     return self.QINIU_BUCKET_NAME
-
-        # auth    = oss2.Auth(self.OSS_ACCESS_KEY_ID, self.OSS_SECRET_ACCESS_KEY)
-        # return oss2.Bucket(auth, self.OSS_ENDPOINT, self.OSS_BUCKET)
 
     def persist_file(self, path, buf, info, meta=None, headers=None):
-        # headers.update(self.HEADERS)
-        # res = self.oss_bucket.put_object(path, buf.getvalue())
-        # print res
         token       = self.q.upload_token(self.QINIU_BUCKET_NAME, path)
         res, info   = put_data(token, path, buf.getvalue())
 
@@ -54,8 +35,6 @@ class QNFilesStore(object):
 class QNImagesPipeline(ImagesPipeline):
 
     STORE_SCHEMES = {
-        # '': FSFilesStore,
-        # 'file': FSFilesStore,
         'qiniu': QNFilesStore,
     }
 
