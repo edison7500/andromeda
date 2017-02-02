@@ -36,11 +36,20 @@ class AmazonSpider(scrapy.Spider):
                     key: asin,
                 }
             )
-
             yield SplashRequest(url, self.parse_book,
                                 args={'wait':0.5},
                                 dont_send_headers=True,
                                 )
+
+        next_page_uri   = response.css('a#pagnNextLink::attr(href)').extract_first()
+        if next_page_uri:
+            next_page_url   = "{scheme}://{host}{uri}".format(
+                scheme  = o.scheme,
+                host    = o.netloc,
+                uri     = next_page_uri
+            )
+            yield scrapy.Request(next_page_url, self.parse)
+
 
     def parse_book(self, response):
         key     = md5(response.url).hexdigest()

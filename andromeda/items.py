@@ -83,3 +83,4 @@ class BookItem(scrapy.Item):
         input_processor=MapCompose(filter_image),
     )
     images      = scrapy.Field()
+

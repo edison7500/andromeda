@@ -27,7 +27,7 @@ CONCURRENT_REQUESTS = 4
 # Configure a delay for requests for the same website (default: 0)
 # See http://scrapy.readthedocs.org/en/latest/topics/settings.html#download-delay
 # See also autothrottle settings and docs
-DOWNLOAD_DELAY = 3
+DOWNLOAD_DELAY = 5
 # The download delay setting will honor only one of:
 #CONCURRENT_REQUESTS_PER_DOMAIN = 16
 #CONCURRENT_REQUESTS_PER_IP = 16
@@ -67,9 +67,11 @@ DEFAULT_REQUEST_HEADERS = {
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
+    'andromeda.pipelines.entrypipeline.DuplicatesPipeline': 50,
     'andromeda.pipelines.qiniupipeline.QNImagesPipeline': 100,
-    # 'scrapy.pipelines.images.ImagesPipeline': 300,
+    'andromeda.pipelines.entrypipeline.ReplaceTextImageURLPipeline': 300,
     'andromeda.pipelines.entrypipeline.PostEntityPipeline': 500,
+    # 'andromeda.pipelines.entrypipeline.PutArticlePipeline': 500,
 }
 
 
@@ -110,13 +112,18 @@ DOWNLOADER_MIDDLEWARES = {
     'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
 }
 
-# SERVER_URL      = 'http://jiaxin.im/api/books/'
-SERVER_URL      = 'http://localhost:8000/api/books/'
+SERVER_URL      = 'http://jiaxin.im/api/books/'
+# SERVER_URL      = 'http://localhost:8000/api/books/'
+
+IMAGES_STORE                = 'images/'
 
 '''
     setting storage
 '''
-IMAGES_STORE                = 'book/images/'
 QINIU_ACCESS_KEY            = "xD6MU4_jZANfAqu9auFQm4qkSIx_ln2hIefKIFAU"
 QINIU_SECRET_KEY            = "NkTHwgTFQHFaujEB3Fo-ZC2jgf6LkjkWT0iWbwWP"
 QINIU_BUCKET_NAME           = "imgjiaxin"
+
+
+LOG_LEVEL   = 'ERROR'
+# LOG_LEVEL   = 'INFO'

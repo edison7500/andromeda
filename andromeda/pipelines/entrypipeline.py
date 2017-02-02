@@ -5,7 +5,7 @@
 # Don't forget to add your pipeline to the ITEM_PIPELINES setting
 # See: http://doc.scrapy.org/en/latest/topics/item-pipeline.html
 
-from hashlib import md5
+# from hashlib import md5
 import requests
 import logging
 
@@ -16,11 +16,9 @@ from andromeda import settings
 class DuplicatesPipeline(object):
 
     def process_item(self, item, spider):
-        identified_code     = md5(item['asin']).hexdigest()
-
-        check_url           = "{url}/{identified_code}".format(
+        check_url           = "{url}{identified_code}".format(
             url = settings.SERVER_URL,
-            identified_code = identified_code,
+            identified_code = item['asin'],
         )
         res = requests.head(check_url)
         if res.status_code  == 200:
@@ -39,5 +37,18 @@ class PostEntityPipeline(object):
             return item
         else:
             logging.error(res.text)
+
+
+
+class ReplaceTextImageURLPipeline(object):
+
+    def process_item(self, item, spider):
+        content = item.get('content')
+
+        for row in item['images']:
+            image_url   = "{host}{path}".format(host="//image.deepto.me/", path=row['path'])
+            content     = content.replace(row['url'], image_url)
+        item['content'] = content
+        return item
 
 
