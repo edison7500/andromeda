@@ -69,7 +69,7 @@ DEFAULT_REQUEST_HEADERS = {
 ITEM_PIPELINES = {
     'andromeda.pipelines.entrypipeline.DuplicatesPipeline': 50,
     'andromeda.pipelines.qiniupipeline.QNImagesPipeline': 100,
-    'andromeda.pipelines.entrypipeline.ReplaceTextImageURLPipeline': 300,
+    # 'andromeda.pipelines.entrypipeline.ReplaceTextImageURLPipeline': 300,
     'andromeda.pipelines.entrypipeline.PostEntityPipeline': 500,
     # 'andromeda.pipelines.entrypipeline.PutArticlePipeline': 500,
 }
