@@ -1,10 +1,11 @@
+from hashlib import md5
+from urlparse import urlparse
+
 import scrapy
 from scrapy.loader import ItemLoader
-from urlparse import urlparse
-from hashlib import md5
-
-from andromeda.items import BookItem
 from scrapy_splash import SplashRequest
+
+from amazon.amazon.items import BookItem
 
 
 class AmazonSpider(scrapy.Spider):

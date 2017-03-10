@@ -1,9 +1,10 @@
 # coding=utf-8
-import scrapy
 from urlparse import urlparse
-from andromeda.items import EntityItem
 
+import scrapy
 from scrapy.loader import ItemLoader
+
+from amazon.amazon.items import EntityItem
 
 
 class GKSpider(scrapy.Spider):
