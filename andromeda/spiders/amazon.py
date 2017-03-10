@@ -19,7 +19,8 @@ class AmazonSpider(scrapy.Spider):
 
         self.start_urls =[
             # 'https://www.amazon.cn/s?ie=UTF8&page=1&rh=n%3A658390051%2Ck%3APython',
-            'https://www.amazon.cn/s?ie=UTF8&page=1&rh=n%3A658390051%2Ck%3Adjango',
+            # 'https://www.amazon.cn/s?ie=UTF8&page=1&rh=n%3A658390051%2Ck%3Adjango',
+            'https://www.amazon.cn/s?ie=UTF8&page=1&rh=n%3A658390051%2Ck%3Anginx',
         ]
         self.queue_dict = dict()
 

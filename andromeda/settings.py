@@ -74,10 +74,6 @@ ITEM_PIPELINES = {
     # 'andromeda.pipelines.entrypipeline.PutArticlePipeline': 500,
 }
 
-
-
-
-
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
 #AUTOTHROTTLE_ENABLED = True
@@ -98,10 +94,6 @@ ITEM_PIPELINES = {
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
-
-
-# PHANTOMJS_PATH      = '/usr/local/bin/phantomjs'
-# PHANTOMJS_SPIDER    = ['amazon']
 
 
 SPLASH_URL = 'http://localhost:8050'
@@ -125,5 +117,5 @@ QINIU_SECRET_KEY            = "NkTHwgTFQHFaujEB3Fo-ZC2jgf6LkjkWT0iWbwWP"
 QINIU_BUCKET_NAME           = "imgjiaxin"
 
 
-LOG_LEVEL   = 'ERROR'
-# LOG_LEVEL   = 'INFO'
+# LOG_LEVEL   = 'ERROR'
+LOG_LEVEL   = 'INFO'
