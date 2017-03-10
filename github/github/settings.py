@@ -11,8 +11,8 @@
 
 BOT_NAME = 'andromeda'
 
-SPIDER_MODULES = ['andromeda.spiders']
-NEWSPIDER_MODULE = 'andromeda.spiders'
+SPIDER_MODULES = ['github.spiders']
+NEWSPIDER_MODULE = 'github.spiders'
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
@@ -67,11 +67,8 @@ DEFAULT_REQUEST_HEADERS = {
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'andromeda.pipelines.entrypipeline.DuplicatesPipeline': 50,
-    'andromeda.pipelines.qiniupipeline.QNImagesPipeline': 100,
-    # 'andromeda.pipelines.entrypipeline.ReplaceTextImageURLPipeline': 300,
-    'andromeda.pipelines.entrypipeline.PostEntityPipeline': 500,
-    # 'andromeda.pipelines.entrypipeline.PutArticlePipeline': 500,
+    'github.pipelines.entrypipeline.DuplicatesPipeline': 50,
+    'github.pipelines.qiniupipeline.QNImagesPipeline': 100,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -89,11 +86,11 @@ ITEM_PIPELINES = {
 
 # Enable and configure HTTP caching (disabled by default)
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
-#HTTPCACHE_ENABLED = True
-#HTTPCACHE_EXPIRATION_SECS = 0
-#HTTPCACHE_DIR = 'httpcache'
-#HTTPCACHE_IGNORE_HTTP_CODES = []
-#HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+HTTPCACHE_ENABLED = True
+HTTPCACHE_EXPIRATION_SECS = 86400
+HTTPCACHE_DIR = 'httpcache'
+HTTPCACHE_IGNORE_HTTP_CODES = [404, 500]
+HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 
 SPLASH_URL = 'http://localhost:8050'
@@ -104,7 +101,7 @@ DOWNLOADER_MIDDLEWARES = {
     'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
 }
 
-SERVER_URL      = 'http://jiaxin.im/api/books/'
+SERVER_URL      = 'http://jiaxin.im/api/project/'
 # SERVER_URL      = 'http://localhost:8000/api/books/'
 
 IMAGES_STORE                = 'images/'

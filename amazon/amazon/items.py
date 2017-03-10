@@ -75,7 +75,6 @@ class BookItem(scrapy.Item):
         input_processor=MapCompose(remove_tags),
         output_processor=TakeFirst(),
     )
-    # source      = scrapy.Field()
     origin_link = scrapy.Field(
         output_processor=TakeFirst(),
     )

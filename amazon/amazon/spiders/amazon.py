@@ -5,7 +5,7 @@ import scrapy
 from scrapy.loader import ItemLoader
 from scrapy_splash import SplashRequest
 
-from amazon.amazon.items import BookItem
+from amazon.items import BookItem
 
 
 class AmazonSpider(scrapy.Spider):
