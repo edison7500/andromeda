@@ -88,3 +88,8 @@ HTTPCACHE_EXPIRATION_SECS = 0
 HTTPCACHE_DIR = 'httpcache'
 HTTPCACHE_IGNORE_HTTP_CODES = [404, 500]
 HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+
+ITEM_PIPELINES = {'scrapy.pipelines.images.ImagesPipeline': 1}
+
+IMAGES_STORE = '/Users/xiejiaxin/Desktop/chaojiin/images'
