@@ -67,7 +67,7 @@ DEFAULT_REQUEST_HEADERS = {
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'github.pipelines.entrypipeline.DuplicatesPipeline': 50,
+    # 'github.pipelines.entrypipeline.DuplicatesPipeline': 50,
     'github.pipelines.qiniupipeline.QNImagesPipeline': 100,
 }
 
