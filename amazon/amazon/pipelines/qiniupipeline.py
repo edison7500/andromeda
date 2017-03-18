@@ -1,6 +1,6 @@
 from qiniu import BucketManager
 from scrapy.pipelines.images import ImagesPipeline
-from andromeda import settings
+from amazon import settings
 from email.utils import parsedate_tz, mktime_tz
 
 from qiniu import Auth, put_data, etag, urlsafe_base64_encode

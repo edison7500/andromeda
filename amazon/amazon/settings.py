@@ -67,10 +67,10 @@ DEFAULT_REQUEST_HEADERS = {
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    'andromeda.pipelines.entrypipeline.DuplicatesPipeline': 50,
-    'andromeda.pipelines.qiniupipeline.QNImagesPipeline': 100,
+    'amazon.pipelines.entrypipeline.DuplicatesPipeline': 50,
+    'amazon.pipelines.qiniupipeline.QNImagesPipeline': 100,
     # 'andromeda.pipelines.entrypipeline.ReplaceTextImageURLPipeline': 300,
-    'andromeda.pipelines.entrypipeline.PostEntityPipeline': 500,
+    'amazon.pipelines.entrypipeline.PostEntityPipeline': 500,
     # 'andromeda.pipelines.entrypipeline.PutArticlePipeline': 500,
 }
 
