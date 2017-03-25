@@ -10,7 +10,7 @@ import requests
 import logging
 
 from scrapy.exceptions import DropItem
-from andromeda import settings
+from amazon import settings
 
 
 class DuplicatesPipeline(object):
