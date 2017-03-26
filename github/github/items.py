@@ -10,20 +10,18 @@ import scrapy
 from scrapy.loader.processors import Join, MapCompose, TakeFirst
 from w3lib.html import remove_tags
 
-import html2text
-
-h = html2text.HTML2Text()
+# import html2text
+#
+# h = html2text.HTML2Text()
 
 
 
 def trim_string(value):
     return value.strip()
 
-
 def get_count(value):
     value   = value.replace(',', '')
     return int(value)
-
 
 def process_readme(value):
     _readme = remove_tags(value, which_ones=('article', ))

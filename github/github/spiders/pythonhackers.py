@@ -16,7 +16,8 @@ class PyHackerSpider(scrapy.Spider):
     def __init__(self, *args, **kwargs):
         super(PyHackerSpider, self).__init__(*args, **kwargs)
         self.start_urls = [
-            'http://pythonhackers.com/open-source/'
+            # 'http://pythonhackers.com/open-source/'
+            'http://pythonhackers.com/Python/top-projects'
         ]
 
     def parse(self, response):
@@ -38,10 +39,6 @@ class PyHackerSpider(scrapy.Spider):
         yield scrapy.Request(github_url, callback=self.parse_github)
 
     def parse_github(self, response):
-        # self.logger.info(response.url)
-
-        # readme  = response.css('article.markdown-body')
-
         item    = ItemLoader(item=GithubItem(), response=response)
 
         item.add_css('author', 'h1.public >span.author >a')

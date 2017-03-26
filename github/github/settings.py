@@ -68,6 +68,7 @@ DEFAULT_REQUEST_HEADERS = {
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     # 'github.pipelines.qiniupipeline.QNImagesPipeline': 100,
+    'github.pipelines.entrypipeline.DuplicatesPipeline': 50,
     'github.pipelines.entrypipeline.PostProjectPipeline': 100,
 }
 
@@ -114,5 +115,5 @@ QINIU_SECRET_KEY            = "NkTHwgTFQHFaujEB3Fo-ZC2jgf6LkjkWT0iWbwWP"
 QINIU_BUCKET_NAME           = "imgjiaxin"
 
 
-# LOG_LEVEL   = 'ERROR'
-LOG_LEVEL   = 'DEBUG'
+LOG_LEVEL   = 'ERROR'
+# LOG_LEVEL   = 'DEBUG'
