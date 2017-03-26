@@ -13,6 +13,16 @@ from scrapy.exceptions import DropItem
 from github import settings
 
 
+class PostProjectPipeline(object):
+
+    def process_item(self, item, spider):
+        # print (item)
+        url = settings.SERVER_URL
+        res = requests.post(url, json=dict(item))
+        print (res.json())
+
+
+
 # class DuplicatesPipeline(object):
 #
 #     def process_item(self, item, spider):

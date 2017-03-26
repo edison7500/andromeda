@@ -79,6 +79,6 @@ class GithubItem(scrapy.Item):
         output_processor=TakeFirst(),
     )
 
-    link    = scrapy.Field(
+    github_url    = scrapy.Field(
         output_processor=TakeFirst(),
     )

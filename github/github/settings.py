@@ -9,7 +9,7 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'andromeda'
+BOT_NAME = 'github'
 
 SPIDER_MODULES = ['github.spiders']
 NEWSPIDER_MODULE = 'github.spiders'
@@ -67,8 +67,8 @@ DEFAULT_REQUEST_HEADERS = {
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
-    # 'github.pipelines.entrypipeline.DuplicatesPipeline': 50,
-    'github.pipelines.qiniupipeline.QNImagesPipeline': 100,
+    # 'github.pipelines.qiniupipeline.QNImagesPipeline': 100,
+    'github.pipelines.entrypipeline.PostProjectPipeline': 100,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -101,8 +101,8 @@ DOWNLOADER_MIDDLEWARES = {
     'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
 }
 
-SERVER_URL      = 'http://jiaxin.im/api/project/'
-# SERVER_URL      = 'http://localhost:8000/api/books/'
+# SERVER_URL      = 'http://jiaxin.im/api/project/'
+SERVER_URL      = 'http://localhost:8000/api/opensource/'
 
 IMAGES_STORE                = 'images/'
 

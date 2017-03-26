@@ -52,6 +52,7 @@ class PyHackerSpider(scrapy.Spider):
         item.add_css('fork', 'ul.pagehead-actions >li >a.social-count')
         item.add_css('readme', 'article.markdown-body')
 
-        item.add_value('link', response.url)
+        item.add_value('github_url', response.url)
 
-        self.logger.info(item.load_item())
+        # self.logger.info(item.load_item())
+        return item.load_item()
