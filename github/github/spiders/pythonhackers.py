@@ -38,7 +38,10 @@ class PyHackerSpider(scrapy.Spider):
         yield scrapy.Request(github_url, callback=self.parse_github)
 
     def parse_github(self, response):
-        self.logger.info(response.url)
+        # self.logger.info(response.url)
+
+        # readme  = response.css('article.markdown-body')
+
         item    = ItemLoader(item=GithubItem(), response=response)
 
         item.add_css('author', 'h1.public >span.author >a')
@@ -47,8 +50,8 @@ class PyHackerSpider(scrapy.Spider):
         item.add_css('watch', 'ul.pagehead-actions >li >a.social-count')
         item.add_css('star', 'ul.pagehead-actions >li >a.social-count')
         item.add_css('fork', 'ul.pagehead-actions >li >a.social-count')
+        item.add_css('readme', 'article.markdown-body')
 
         item.add_value('link', response.url)
 
-        # return item.load_item()
         self.logger.info(item.load_item())
