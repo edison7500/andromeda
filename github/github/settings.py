@@ -115,4 +115,4 @@ QINIU_BUCKET_NAME           = "imgjiaxin"
 
 
 # LOG_LEVEL   = 'ERROR'
-LOG_LEVEL   = 'INFO'
+LOG_LEVEL   = 'DEBUG'

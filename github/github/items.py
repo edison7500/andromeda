@@ -27,7 +27,8 @@ def get_count(value):
 
 def process_readme(value):
     _readme = remove_tags(value, which_ones=('article', ))
-    return h.handle(_readme)
+    return _readme
+    # return h.handle(_readme)
 
 class TakeSecond(object):
     def __call__(self, values):
