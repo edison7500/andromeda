@@ -20,8 +20,11 @@ class ProjectStatsSpider(scrapy.Spider):
 
 
     def start_requests(self):
-
+        params = {
+            'size': 100,
+        }
         res = requests.get(url=settings.SERVER_URL,
+                           params=params,
                            headers=settings.SERVER_HEADER)
         data            = res.json()['results']
         self.cache_info = dict()
@@ -36,12 +39,8 @@ class ProjectStatsSpider(scrapy.Spider):
                 }
             )
             yield scrapy.Request(url=row['github_url'], callback=self.parse)
-            # urls.append(
-            #     row['github_url']
-            # )
 #
     def parse(self, response):
-        # self.logger.info(response.url)
         key     = md5(response.url).hexdigest()
 
         info    = self.cache_info.pop(key)
