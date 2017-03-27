@@ -42,9 +42,7 @@ class ProjectStatsSpider(scrapy.Spider):
 #
     def parse(self, response):
         key     = md5(response.url).hexdigest()
-
         info    = self.cache_info.pop(key)
-
         item    = ItemLoader(item=PStatsItem(), response=response)
         item.add_css('watch', 'ul.pagehead-actions >li >a.social-count')
         item.add_css('star', 'ul.pagehead-actions >li >a.social-count')
