@@ -102,7 +102,7 @@ DOWNLOADER_MIDDLEWARES = {
     'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
 }
 
-# SERVER_URL      = 'http://jiaxin.im/api/project/'
+# SERVER_URL      = 'http://www.jiaxin.im/api/opensource/'
 SERVER_URL      = 'http://localhost:8000/api/opensource/'
 
 IMAGES_STORE                = 'images/'

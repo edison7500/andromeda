@@ -39,17 +39,25 @@ class PyHackerSpider(scrapy.Spider):
         yield scrapy.Request(github_url, callback=self.parse_github)
 
     def parse_github(self, response):
+
+
         item    = ItemLoader(item=GithubItem(), response=response)
 
         item.add_css('author', 'h1.public >span.author >a')
         item.add_css('name', 'h1.public >strong >a')
         item.add_css('desc', 'div.repository-meta-content')
-        item.add_css('watch', 'ul.pagehead-actions >li >a.social-count')
-        item.add_css('star', 'ul.pagehead-actions >li >a.social-count')
-        item.add_css('fork', 'ul.pagehead-actions >li >a.social-count')
-        item.add_css('readme', 'article.markdown-body')
+        # item.add_css('watch', 'ul.pagehead-actions >li >a.social-count')
+        # item.add_css('star', 'ul.pagehead-actions >li >a.social-count')
+        # item.add_css('fork', 'ul.pagehead-actions >li >a.social-count')
+
+        # readme  = response.css('article.markdown-body').extract_first()
+        if response.css('article.markdown-body').extract_first():
+            item.add_css('readme', 'article.markdown-body')
+        else:
+            item.add_css('readme', 'div.plain')
 
         item.add_value('github_url', response.url)
+        item.add_value('category', 1)
 
         # self.logger.info(item.load_item())
         return item.load_item()
