@@ -43,12 +43,6 @@ class TakeThird(object):
 
 
 class GithubItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    # title   = scrapy.Field(
-    #     input_processor=MapCompose(remove_tags),
-    #     output_processor=TakeFirst(),
-    # )
     author  = scrapy.Field(
         input_processor=MapCompose(remove_tags),
         output_processor=TakeFirst(),
@@ -83,4 +77,22 @@ class GithubItem(scrapy.Item):
 
     github_url    = scrapy.Field(
         output_processor=TakeFirst(),
+    )
+
+
+class PStatsItem(scrapy.Item):
+    project = scrapy.Field(
+        output_processor=TakeFirst(),
+    )
+    watch   = scrapy.Field(
+        input_processor=MapCompose(remove_tags, trim_string, get_count),
+        output_processor=TakeFirst(),
+    )
+    star    = scrapy.Field(
+        input_processor=MapCompose(remove_tags, trim_string, get_count),
+        output_processor=TakeSecond(),
+    )
+    fork    = scrapy.Field(
+        input_processor=MapCompose(remove_tags, get_count),
+        output_processor=TakeThird(),
     )

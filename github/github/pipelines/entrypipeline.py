@@ -13,6 +13,25 @@ from scrapy.exceptions import DropItem
 from github import settings
 
 
+
+class UpdatePStatsPipeline(object):
+    def process_item(self, item, spider):
+        # print (spider.name)
+        if spider.name == 'pstats':
+            spider.logger.info(item['project'])
+
+            update_stats_url    = "{base_url}{project}/stats".format(
+                base_url=settings.SERVER_URL,
+                project=item['project'],
+            )
+            res = requests.post(update_stats_url, json=dict(item), headers=settings.SERVER_HEADER)
+            if res.status_code == 201:
+                spider.logger.info("OK")
+            raise DropItem(item)
+        else:
+            return item
+
+
 class DuplicatesPipeline(object):
 
     def process_item(self, item, spider):
@@ -23,7 +42,7 @@ class DuplicatesPipeline(object):
             base_url=url,
             id_code=identified_code,
         )
-        res             = requests.head(check_url)
+        res             = requests.head(check_url, headers=settings.SERVER_HEADER)
         if res.status_code == 200:
             raise DropItem(item)
         else:
@@ -34,36 +53,8 @@ class PostProjectPipeline(object):
 
     def process_item(self, item, spider):
         url = settings.SERVER_URL
-        res = requests.post(url, json=dict(item))
+        res = requests.post(url, json=dict(item), headers=settings.SERVER_HEADER)
         if res.status_code == 201:
             print ("OK")
-
-
-
-# class DuplicatesPipeline(object):
-#
-#     def process_item(self, item, spider):
-#         check_url           = "{url}{identified_code}".format(
-#             url = settings.SERVER_URL,
-#             identified_code = item['asin'],
-#         )
-#         res = requests.head(check_url)
-#         if res.status_code  == 200:
-#             raise DropItem("Duplicate entity found: %s", item)
-#         else:
-#             return item
-
-
-# class PostEntityPipeline(object):
-#
-#     def process_item(self, item, spider):
-#         image_path          = [row['path'] for row in item['images']]
-#         item['image_urls']  = image_path
-#         res = requests.post(settings.SERVER_URL, json=dict(item))
-#         if res.status_code == 201:
-#             return item
-#         else:
-#             logging.error(res.text)
-#
 
 

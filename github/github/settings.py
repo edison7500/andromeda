@@ -68,8 +68,9 @@ DEFAULT_REQUEST_HEADERS = {
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     # 'github.pipelines.qiniupipeline.QNImagesPipeline': 100,
-    'github.pipelines.entrypipeline.DuplicatesPipeline': 50,
-    'github.pipelines.entrypipeline.PostProjectPipeline': 100,
+    'github.pipelines.entrypipeline.UpdatePStatsPipeline': 50,
+    'github.pipelines.entrypipeline.DuplicatesPipeline': 100,
+    'github.pipelines.entrypipeline.PostProjectPipeline': 200,
 }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -94,26 +95,28 @@ HTTPCACHE_IGNORE_HTTP_CODES = [404, 500]
 HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
 
-SPLASH_URL = 'http://localhost:8050'
+# SPLASH_URL = 'http://localhost:8050'
+# DOWNLOADER_MIDDLEWARES = {
+#     'scrapy_splash.SplashCookiesMiddleware': 723,
+#     'scrapy_splash.SplashMiddleware': 725,
+#     'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+# }
 
-DOWNLOADER_MIDDLEWARES = {
-    'scrapy_splash.SplashCookiesMiddleware': 723,
-    'scrapy_splash.SplashMiddleware': 725,
-    'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
+SERVER_URL      = 'http://www.jiaxin.im/api/opensource/'
+SERVER_HEADER   = {
+    'Authorization': 'Token ad1eb35acec4d816f868e95fef394f1285f3d26c',
 }
+# SERVER_URL      = 'http://localhost:8000/api/opensource/'
 
-# SERVER_URL      = 'http://www.jiaxin.im/api/opensource/'
-SERVER_URL      = 'http://localhost:8000/api/opensource/'
-
-IMAGES_STORE                = 'images/'
+# IMAGES_STORE                = 'images/'
 
 '''
     setting storage
 '''
-QINIU_ACCESS_KEY            = "xD6MU4_jZANfAqu9auFQm4qkSIx_ln2hIefKIFAU"
-QINIU_SECRET_KEY            = "NkTHwgTFQHFaujEB3Fo-ZC2jgf6LkjkWT0iWbwWP"
-QINIU_BUCKET_NAME           = "imgjiaxin"
+# QINIU_ACCESS_KEY            = "xD6MU4_jZANfAqu9auFQm4qkSIx_ln2hIefKIFAU"
+# QINIU_SECRET_KEY            = "NkTHwgTFQHFaujEB3Fo-ZC2jgf6LkjkWT0iWbwWP"
+# QINIU_BUCKET_NAME           = "imgjiaxin"
 
 
-LOG_LEVEL   = 'ERROR'
-# LOG_LEVEL   = 'DEBUG'
+# LOG_LEVEL   = 'ERROR'
+LOG_LEVEL   = 'DEBUG'
