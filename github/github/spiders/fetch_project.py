@@ -14,14 +14,26 @@ class FetchProjectSpider(scrapy.Spider):
 
     def __init__(self, *args, **kwargs):
         super(FetchProjectSpider, self).__init__(*args, **kwargs)
+        self.cache_info     = dict()
+        # self.next_page_url  = None
+
+
+    def _fetch_project(self, next_page_url=None):
+        if next_page_url is None:
+            fetch_url   = "{base_url}fetch/project/".format(base_url=settings.SERVER_URL)
+        else:
+            fetch_url   = next_page_url
+        res         = requests.get(fetch_url, headers=settings.SERVER_HEADER)
+        # data        = res.json()['results']
+        return res.json()
 
     def start_requests(self):
-        fetch_url   = "{base_url}fetch/project/".format(base_url=settings.SERVER_URL)
-        res         = requests.get(fetch_url, headers=settings.SERVER_HEADER)
-        data        = res.json()['results']
-        self.cache_info = dict()
+        # fetch_url   = "{base_url}fetch/project/".format(base_url=settings.SERVER_URL)
+        # res         = requests.get(fetch_url, headers=settings.SERVER_HEADER)
+        # data        = res.json()['results']
+        data        = self._fetch_project()
 
-        for row in data:
+        for row in data['results']:
             key = md5(row['url']).hexdigest()
             self.cache_info.update(
                 {
@@ -32,6 +44,30 @@ class FetchProjectSpider(scrapy.Spider):
                 }
             )
             yield scrapy.Request(row['url'], self.parse)
+        next_page_url   = data['next']
+        while True:
+            if next_page_url:
+                data = self._fetch_project(next_page_url=next_page_url)
+                for row in data['results']:
+                    key = md5(row['url']).hexdigest()
+                    self.cache_info.update(
+                        {
+                            key: {
+                                'url': row['url'],
+                                'category': row['category']
+                            }
+                        }
+                    )
+                    yield scrapy.Request(row['url'], self.parse)
+                next_page_url = data['next']
+            else:
+                break
+
+
+        # if data['next']:
+        #     self.next_page_url  = data['next']
+        #     self.start_requests()
+
 
     def parse(self, response):
         key     = md5(response.url).hexdigest()
