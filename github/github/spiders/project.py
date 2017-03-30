@@ -17,6 +17,7 @@ class ProjectStatsSpider(scrapy.Spider):
 
     def __init__(self, *args, **kwargs):
         super(ProjectStatsSpider, self).__init__(*args, **kwargs)
+        self.next_page_url  = None
 
 
     def _fetch_project(self, next_page_url=None):
@@ -33,13 +34,6 @@ class ProjectStatsSpider(scrapy.Spider):
 
 
     def start_requests(self):
-        # params = {
-        #     'size': 30,
-        # }
-        # res = requests.get(url=settings.SERVER_URL,
-        #                    params=params,
-        #                    headers=settings.SERVER_HEADER)
-        # data            = res.json()['results']
         data            = self._fetch_project()
         self.cache_info = dict()
         for row in data['results']:
@@ -53,12 +47,13 @@ class ProjectStatsSpider(scrapy.Spider):
                 }
             )
             yield scrapy.Request(url=row['github_url'], callback=self.parse)
-        next_page_url = data['next']
+        self.next_page_url = data['next']
+        # self.logger.info(next_page_url)
         while True:
-            if next_page_url:
-                data = self._fetch_project(next_page_url=next_page_url)
+            if self.next_page_url:
+                data = self._fetch_project(next_page_url=self.next_page_url)
                 for row in data['results']:
-                    key = md5(row['url']).hexdigest()
+                    key = md5(row['github_url']).hexdigest()
                     self.cache_info.update(
                         {
                             key: {
@@ -66,8 +61,8 @@ class ProjectStatsSpider(scrapy.Spider):
                             }
                         }
                     )
-                    yield scrapy.Request(row['url'], self.parse)
-                next_page_url = data['next']
+                    yield scrapy.Request(row['github_url'], self.parse)
+                self.next_page_url = data['next']
             else:
                 break
 #

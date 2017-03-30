@@ -58,18 +58,6 @@ class GithubItem(scrapy.Item):
         input_processor=MapCompose(remove_tags, trim_string),
         output_processor=TakeFirst(),
     )
-    # watch   = scrapy.Field(
-    #     input_processor=MapCompose(remove_tags, trim_string, get_count),
-    #     output_processor=TakeFirst(),
-    # )
-    # star    = scrapy.Field(
-    #     input_processor=MapCompose(remove_tags, trim_string, get_count),
-    #     output_processor=TakeSecond(),
-    # )
-    # fork    = scrapy.Field(
-    #     input_processor=MapCompose(remove_tags, get_count),
-    #     output_processor=TakeThird(),
-    # )
     readme  = scrapy.Field(
         input_processor=MapCompose(process_readme, ),
         output_processor=TakeFirst(),
