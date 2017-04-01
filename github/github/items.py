@@ -10,10 +10,6 @@ import scrapy
 from scrapy.loader.processors import Join, MapCompose, TakeFirst
 from w3lib.html import remove_tags
 
-# import html2text
-#
-# h = html2text.HTML2Text()
-
 
 
 def trim_string(value):

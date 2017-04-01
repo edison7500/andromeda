@@ -7,8 +7,6 @@
 
 from hashlib import md5
 import requests
-import logging
-
 from scrapy.exceptions import DropItem
 from github import settings
 
@@ -55,6 +53,6 @@ class PostProjectPipeline(object):
         url = settings.SERVER_URL
         res = requests.post(url, json=dict(item), headers=settings.SERVER_HEADER)
         if res.status_code == 201:
-            print ("OK")
+            spider.logger.info("success ok")
 
 
