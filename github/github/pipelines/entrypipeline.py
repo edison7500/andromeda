@@ -22,9 +22,10 @@ class UpdatePStatsPipeline(object):
                 base_url=settings.SERVER_URL,
                 project=item['project'],
             )
-            res = requests.post(update_stats_url, json=dict(item), headers=settings.SERVER_HEADER)
+            res = requests.post(update_stats_url, json=dict(item),
+                                headers=settings.SERVER_HEADER)
             if res.status_code == 201:
-                spider.logger.info("OK")
+                spider.logger.info("success OK")
             raise DropItem(item)
         else:
             return item
