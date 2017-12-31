@@ -11,14 +11,13 @@ from scrapy.exceptions import DropItem
 from github import settings
 
 
-
 class UpdatePStatsPipeline(object):
     def process_item(self, item, spider):
         # print (spider.name)
         if spider.name == 'pstats':
             spider.logger.info(item['project'])
 
-            update_stats_url    = "{base_url}{project}/stats".format(
+            update_stats_url = "{base_url}{project}/stats".format(
                 base_url=settings.SERVER_URL,
                 project=item['project'],
             )
@@ -34,16 +33,22 @@ class UpdatePStatsPipeline(object):
 class DuplicatesPipeline(object):
 
     def process_item(self, item, spider):
-        github_url      = item['github_url']
+        github_url = item['github_url']
         identified_code = md5(github_url).hexdigest()
-        url             = settings.SERVER_URL
-        check_url       = "{base_url}{id_code}".format(
+        url = settings.SERVER_URL
+        check_url = "{base_url}{id_code}".format(
             base_url=url,
             id_code=identified_code,
         )
-        res             = requests.head(check_url, headers=settings.SERVER_HEADER)
+        res = requests.head(check_url, headers=settings.SERVER_HEADER)
         if res.status_code == 200:
-            raise DropItem(item)
+            # raise DropItem(item)
+            url = "{url}{id}.json".format(url=settings.SERVER_URL, id=identified_code)
+            # print dict(item)
+            # readme = item['readme']
+            res = requests.put(url, data={"readme": item["readme"]}, headers=settings.SERVER_HEADER)
+            # spider.logger.info(res.json())
+            DropItem(item)
         else:
             return item
 
@@ -55,5 +60,6 @@ class PostProjectPipeline(object):
         res = requests.post(url, json=dict(item), headers=settings.SERVER_HEADER)
         if res.status_code == 201:
             spider.logger.info("success ok")
-
-
+        else:
+            DropItem(item)
+        return item

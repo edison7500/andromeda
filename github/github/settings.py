@@ -102,7 +102,7 @@ HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 #     'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
 # }
 
-SERVER_URL      = 'http://www.jiaxin.im/api/opensource/'
+SERVER_URL      = 'http://jiaxin.im/api/opensource/'
 SERVER_HEADER   = {
     'Authorization': 'Token ad1eb35acec4d816f868e95fef394f1285f3d26c',
     # 'Authorization': 'Token 893048354d2966fcb5895a568c4b2be1073dd3e7',
@@ -119,5 +119,5 @@ SERVER_HEADER   = {
 # QINIU_BUCKET_NAME           = "imgjiaxin"
 
 
-LOG_LEVEL   = 'ERROR'
-# LOG_LEVEL   = 'DEBUG'
+# LOG_LEVEL   = 'ERROR'
+LOG_LEVEL   = 'DEBUG'

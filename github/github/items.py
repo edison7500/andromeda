@@ -9,26 +9,30 @@ import scrapy
 
 from scrapy.loader.processors import Join, MapCompose, TakeFirst
 from w3lib.html import remove_tags
-
+import html2text
 
 
 def trim_string(value):
     return value.strip()
 
+
 def get_count(value):
-    value   = value.replace(',', '')
+    value = value.replace(',', '')
     return int(value)
 
+
 def process_readme(value):
-    _readme = remove_tags(value, which_ones=('article', ))
-    return _readme
+    _readme = remove_tags(value, which_ones=('article',))
+    return html2text.html2text(_readme)
     # return h.handle(_readme)
+
 
 class TakeSecond(object):
     def __call__(self, values):
         if len(values) >= 2:
             return values[1]
         return 0
+
 
 class TakeThird(object):
     def __call__(self, values):
@@ -37,29 +41,28 @@ class TakeThird(object):
         return 0
 
 
-
 class GithubItem(scrapy.Item):
-    author  = scrapy.Field(
+    author = scrapy.Field(
         input_processor=MapCompose(remove_tags),
         output_processor=TakeFirst(),
     )
-    name    = scrapy.Field(
+    name = scrapy.Field(
         input_processor=MapCompose(remove_tags),
         output_processor=TakeFirst(),
     )
     category = scrapy.Field(
         output_processor=TakeFirst(),
     )
-    desc    = scrapy.Field(
+    desc = scrapy.Field(
         input_processor=MapCompose(remove_tags, trim_string),
         output_processor=TakeFirst(),
     )
-    readme  = scrapy.Field(
+    readme = scrapy.Field(
         input_processor=MapCompose(process_readme, ),
         output_processor=TakeFirst(),
     )
 
-    github_url    = scrapy.Field(
+    github_url = scrapy.Field(
         output_processor=TakeFirst(),
     )
 
@@ -68,15 +71,15 @@ class PStatsItem(scrapy.Item):
     project = scrapy.Field(
         output_processor=TakeFirst(),
     )
-    watch   = scrapy.Field(
+    watch = scrapy.Field(
         input_processor=MapCompose(remove_tags, trim_string, get_count),
         output_processor=TakeFirst(),
     )
-    star    = scrapy.Field(
+    star = scrapy.Field(
         input_processor=MapCompose(remove_tags, trim_string, get_count),
         output_processor=TakeSecond(),
     )
-    fork    = scrapy.Field(
+    fork = scrapy.Field(
         input_processor=MapCompose(remove_tags, get_count),
         output_processor=TakeThird(),
     )
