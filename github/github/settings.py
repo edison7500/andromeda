@@ -14,9 +14,8 @@ BOT_NAME = 'github'
 SPIDER_MODULES = ['github.spiders']
 NEWSPIDER_MODULE = 'github.spiders'
 
-
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'andromeda (+http://www.yourdomain.com)'
+# USER_AGENT = 'andromeda (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = False
@@ -29,26 +28,26 @@ CONCURRENT_REQUESTS = 4
 # See also autothrottle settings and docs
 DOWNLOAD_DELAY = 5
 # The download delay setting will honor only one of:
-#CONCURRENT_REQUESTS_PER_DOMAIN = 16
-#CONCURRENT_REQUESTS_PER_IP = 16
+# CONCURRENT_REQUESTS_PER_DOMAIN = 16
+# CONCURRENT_REQUESTS_PER_IP = 16
 
 # Disable cookies (enabled by default)
-#COOKIES_ENABLED = False
+# COOKIES_ENABLED = False
 
 # Disable Telnet Console (enabled by default)
-#TELNETCONSOLE_ENABLED = False
+# TELNETCONSOLE_ENABLED = False
 
 # Override the default request headers:
 DEFAULT_REQUEST_HEADERS = {
-  'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
-  'Accept-Language': 'zh-cn',
+    'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+    'Accept-Language': 'zh-cn',
 }
 
 # Enable or disable spider middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 # SPIDER_MIDDLEWARES = {
 #     'andromeda.middlewares.downloader.PhantomJSDownloader': 100,
-   # 'andromeda.middlewares.AndromedaSpiderMiddleware': 543,
+# 'andromeda.middlewares.AndromedaSpiderMiddleware': 543,
 # }
 
 # Enable or disable downloader middlewares
@@ -60,9 +59,9 @@ DEFAULT_REQUEST_HEADERS = {
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
-#EXTENSIONS = {
+# EXTENSIONS = {
 #    'scrapy.extensions.telnet.TelnetConsole': None,
-#}
+# }
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
@@ -75,16 +74,16 @@ ITEM_PIPELINES = {
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
-#AUTOTHROTTLE_ENABLED = True
+# AUTOTHROTTLE_ENABLED = True
 # The initial download delay
-#AUTOTHROTTLE_START_DELAY = 5
+# AUTOTHROTTLE_START_DELAY = 5
 # The maximum download delay to be set in case of high latencies
-#AUTOTHROTTLE_MAX_DELAY = 60
+# AUTOTHROTTLE_MAX_DELAY = 60
 # The average number of requests Scrapy should be sending in parallel to
 # each remote server
-#AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
+# AUTOTHROTTLE_TARGET_CONCURRENCY = 1.0
 # Enable showing throttling stats for every response received:
-#AUTOTHROTTLE_DEBUG = False
+# AUTOTHROTTLE_DEBUG = False
 
 # Enable and configure HTTP caching (disabled by default)
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html#httpcache-middleware-settings
@@ -94,7 +93,6 @@ HTTPCACHE_DIR = 'httpcache'
 HTTPCACHE_IGNORE_HTTP_CODES = [404, 500]
 HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 
-
 # SPLASH_URL = 'http://localhost:8050'
 # DOWNLOADER_MIDDLEWARES = {
 #     'scrapy_splash.SplashCookiesMiddleware': 723,
@@ -102,8 +100,8 @@ HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 #     'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
 # }
 
-SERVER_URL      = 'http://jiaxin.im/api/opensource/'
-SERVER_HEADER   = {
+SERVER_URL = 'http://jiaxin.im/api/opensource/'
+SERVER_HEADER = {
     'Authorization': 'Token ad1eb35acec4d816f868e95fef394f1285f3d26c',
     # 'Authorization': 'Token 893048354d2966fcb5895a568c4b2be1073dd3e7',
 }
@@ -119,5 +117,5 @@ SERVER_HEADER   = {
 # QINIU_BUCKET_NAME           = "imgjiaxin"
 
 
-# LOG_LEVEL   = 'ERROR'
-LOG_LEVEL   = 'DEBUG'
+LOG_LEVEL = 'ERROR'
+# LOG_LEVEL   = 'DEBUG'

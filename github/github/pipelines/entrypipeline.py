@@ -36,19 +36,15 @@ class DuplicatesPipeline(object):
         github_url = item['github_url']
         identified_code = md5(github_url).hexdigest()
         url = settings.SERVER_URL
-        check_url = "{base_url}{id_code}".format(
+        check_url = "{base_url}{id_code}.json".format(
             base_url=url,
             id_code=identified_code,
         )
         res = requests.head(check_url, headers=settings.SERVER_HEADER)
         if res.status_code == 200:
-            # raise DropItem(item)
-            url = "{url}{id}.json".format(url=settings.SERVER_URL, id=identified_code)
-            # print dict(item)
-            # readme = item['readme']
-            res = requests.put(url, data={"readme": item["readme"]}, headers=settings.SERVER_HEADER)
-            # spider.logger.info(res.json())
-            DropItem(item)
+            res = requests.put(check_url, data={"readme": item["readme"]}, headers=settings.SERVER_HEADER)
+            spider.logger.info(res.status_code)
+            raise DropItem(item)
         else:
             return item
 
@@ -60,6 +56,6 @@ class PostProjectPipeline(object):
         res = requests.post(url, json=dict(item), headers=settings.SERVER_HEADER)
         if res.status_code == 201:
             spider.logger.info("success ok")
-        else:
-            DropItem(item)
-        return item
+        # else:
+            # DropItem(item)
+        # return item
