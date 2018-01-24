@@ -100,7 +100,7 @@ HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
 #     'scrapy.downloadermiddlewares.httpcompression.HttpCompressionMiddleware': 810,
 # }
 
-SERVER_URL = 'http://jiaxin.im/api/opensource/'
+SERVER_URL = 'https://api.jiaxin.im/api/opensource/'
 SERVER_HEADER = {
     'Authorization': 'Token ad1eb35acec4d816f868e95fef394f1285f3d26c',
     # 'Authorization': 'Token 893048354d2966fcb5895a568c4b2be1073dd3e7',
