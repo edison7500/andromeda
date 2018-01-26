@@ -6,6 +6,7 @@
 # http://doc.scrapy.org/en/latest/topics/items.html
 
 import scrapy
+import requests
 
 from scrapy.loader.processors import Join, MapCompose, TakeFirst
 from w3lib.html import remove_tags
@@ -22,8 +23,14 @@ def get_count(value):
 
 
 def process_readme(value):
-    _readme = remove_tags(value, which_ones=('article',))
-    return html2text.html2text(_readme)
+    # _readme = remove_tags(value)
+    # print(value)
+    raw_readme_url = value.replace("github.com", "raw.githubusercontent.com")
+
+    res = requests.get(raw_readme_url)
+
+    return res.text
+    # return html2text.html2text(_readme)
     # return h.handle(_readme)
 
 

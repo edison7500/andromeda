@@ -7,18 +7,15 @@ from github.items import PStatsItem
 from scrapy.loader import ItemLoader
 
 
-
 class ProjectStatsSpider(scrapy.Spider):
-    name    = 'pstats'
+    name = 'pstats'
     allowed_domains = [
         'github.com',
     ]
 
-
     def __init__(self, *args, **kwargs):
         super(ProjectStatsSpider, self).__init__(*args, **kwargs)
-        self.next_page_url  = None
-
+        self.next_page_url = None
 
     def _fetch_project(self, next_page_url=None):
         if next_page_url is None:
@@ -29,16 +26,15 @@ class ProjectStatsSpider(scrapy.Spider):
                                params=params,
                                headers=settings.SERVER_HEADER)
         else:
-            res         = requests.get(next_page_url, headers=settings.SERVER_HEADER)
+            res = requests.get(next_page_url, headers=settings.SERVER_HEADER)
         return res.json()
 
-
     def start_requests(self):
-        data            = self._fetch_project()
+        data = self._fetch_project()
         self.cache_info = dict()
         for row in data['results']:
             self.logger.info(row['github_url'])
-            key         = md5(row['github_url']).hexdigest()
+            key = md5(row['github_url']).hexdigest()
             self.cache_info.update(
                 {
                     key: {
@@ -65,11 +61,11 @@ class ProjectStatsSpider(scrapy.Spider):
                 self.next_page_url = data['next']
             else:
                 break
-#
+
     def parse(self, response):
-        key     = md5(response.url).hexdigest()
-        info    = self.cache_info.pop(key)
-        item    = ItemLoader(item=PStatsItem(), response=response)
+        key = md5(response.url).hexdigest()
+        info = self.cache_info.pop(key)
+        item = ItemLoader(item=PStatsItem(), response=response)
         item.add_css('watch', 'ul.pagehead-actions >li >a.social-count')
         item.add_css('star', 'ul.pagehead-actions >li >a.social-count')
         item.add_css('fork', 'ul.pagehead-actions >li >a.social-count')

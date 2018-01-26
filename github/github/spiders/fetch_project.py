@@ -2,11 +2,12 @@ import scrapy
 import requests
 
 from hashlib import md5
-
 from scrapy.loader import ItemLoader
+from w3lib.html import remove_tags
 
 from github import settings
 from github.items import GithubItem
+
 
 
 class FetchProjectSpider(scrapy.Spider):
@@ -68,12 +69,21 @@ class FetchProjectSpider(scrapy.Spider):
         item.add_css('author', 'h1.public >span.author >a')
         item.add_css('name', 'h1.public >strong >a')
         item.add_css('desc', 'div.repository-meta-content')
-        if response.css('article.markdown-body').extract_first():
-            item.add_css('readme', 'article.markdown-body')
-        else:
-            item.add_css('readme', 'div.plain')
+        # if response.css('article.markdown-body').extract_first():
+        #     item.add_css('readme', 'article.markdown-body')
+        # else:
+        #     item.add_css('readme', 'div.plain')
+        #
 
+        readme_name = remove_tags(response.css("div#readme >h3").extract_first())
+        readme_name = readme_name.strip()
+        # self.logger.info(response.url)
+        readme_url = "{base_url}/master/{readme}".format(
+            base_url=response.url,
+            readme=readme_name,
+        )
+        item.add_value('readme', readme_url)
         item.add_value('github_url', response.url)
         item.add_value('category', info['category'])
-
+        # self.logger.info(item.load_item())
         return item.load_item()

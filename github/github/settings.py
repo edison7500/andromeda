@@ -117,5 +117,5 @@ SERVER_HEADER = {
 # QINIU_BUCKET_NAME           = "imgjiaxin"
 
 
-LOG_LEVEL = 'ERROR'
-# LOG_LEVEL   = 'DEBUG'
+# LOG_LEVEL = 'ERROR'
+LOG_LEVEL   = 'DEBUG'
