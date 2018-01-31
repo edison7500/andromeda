@@ -24,10 +24,9 @@ class PyHackerSpider(scrapy.Spider):
         o = urlparse(response.url)
         # self.logger.info(response.url)
         for row in response.css('.table >tbody >tr'):
-
             uri = row.css('tr >td >a::attr(href)').extract_first()
             # self.logger.info(uri)
-            _url    = "{scheme}://{host}{uri}".format(
+            _url = "{scheme}://{host}{uri}".format(
                 scheme=o.scheme,
                 host=o.netloc,
                 uri=uri,
@@ -35,13 +34,12 @@ class PyHackerSpider(scrapy.Spider):
             yield scrapy.Request(_url, callback=self.parse_project)
 
     def parse_project(self, response):
-        github_url  = response.css('a.pad10::attr(href)').extract_first()
+        github_url = response.css('a.pad10::attr(href)').extract_first()
         yield scrapy.Request(github_url, callback=self.parse_github)
 
     def parse_github(self, response):
 
-
-        item    = ItemLoader(item=GithubItem(), response=response)
+        item = ItemLoader(item=GithubItem(), response=response)
 
         item.add_css('author', 'h1.public >span.author >a')
         item.add_css('name', 'h1.public >strong >a')
